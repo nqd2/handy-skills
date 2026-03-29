@@ -1,0 +1,9 @@
+{
+  "name": "skillssh-find-skills",
+  "version": "1.0.0",
+  "description": "Search, discover, and install AI Agent skills directly from the skills.sh registry using Playwright.",
+  "main": "scripts/skill-manager.js",
+  "dependencies": {
+    "playwright": "^1.42.0"
+  }
+}
