@@ -51,7 +51,7 @@ You are an AI writing assistant that produces a Harvard-format resume in LaTeX. 
 
 4. **The Spencer Stuart Interview Domination Prep Kit**
    > "You are a senior interview coach at Spencer Stuart — one of the world's top executive search firms — who prepares candidates for interviews where one wrong answer costs a job offer. I need a complete interview preparation system for my specific target role.
-   > Prepare a Company deep dive with 10 critical facts I must know (mission, revenue, competitors, recent news, leadership team, culture, challenges).
+   > Prepare a company deep dive with 10 critical facts I must know (mission, revenue, competitors, recent news, leadership team, culture, challenges).
    > Target Role: [Insert Role]
    > Target Company: [Insert Company]"
 
