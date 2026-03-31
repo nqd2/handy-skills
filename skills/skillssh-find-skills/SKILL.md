@@ -31,7 +31,7 @@ When applying this default preset, do not wait for extra confirmation unless the
      `.agent*/`
    Do not modify nested `.gitignore` files for this step; only the repository root `.gitignore`.
    If not a git repository, do not do this step.
-   
+
 1. **Search for Skills**
    When the user requests to find a skill, execute the `searchSkills(query, limit)` function via the provided `scripts/skill-manager.js` script.
    Present the returned JSON list (Name, ID, Installs) to the user in the chat interface. Wait for the user to select the desired skill.
@@ -42,8 +42,8 @@ When applying this default preset, do not wait for extra confirmation unless the
 3. **Configure the Installation**
    Ask the user in the chat for their installation preferences (skip this step and apply defaults/overrides if the user already specified them in their initial prompt):
    - **Scope:** Project-level (default) or Global (`-g`).
-   - **Agent:** All agents by default (`--agent '*'`) or a specific agent (e.g., `--agent claude-code`, `--agent cursor`).
-   - **Important path reminder:** Ensure installation covers agent skill directories such as `.agents/skills/` and other `.agent*/skills/`-style locations when applicable.
+   - **Agent:** None by default (use `-y` flag to skip confirmation) or a specific agent (e.g., `--agent claude-code`, `--agent cursor`)  (see list in [Supported Agents](#supported-agents))
+   - **Important path reminder:** Ensure installation covers agent skill directories such as `.agents/skills/` and other `.ag ent*/skills/`-style locations when applicable.
 
    
 ## Other Commands
@@ -56,6 +56,109 @@ When applying this default preset, do not wait for extra confirmation unless the
 | `npx skills check`           | Check for available skill updates              |
 | `npx skills update`          | Update all installed skills to latest versions |
 | `npx skills init [name]`     | Create a new SKILL.md template                 |
+
+### `skills remove`
+
+Remove installed skills from agents.
+
+```bash
+# Remove interactively (select from installed skills)
+npx skills remove
+
+# Remove specific skill by name
+npx skills remove web-design-guidelines
+
+# Remove multiple skills
+npx skills remove frontend-design web-design-guidelines
+
+# Remove from global scope
+npx skills remove --global web-design-guidelines
+
+# Remove from specific agents only
+npx skills remove --agent claude-code cursor my-skill
+
+# Remove all installed skills without confirmation
+npx skills remove --all
+
+# Remove all skills from a specific agent
+npx skills remove --skill '*' -a cursor
+
+# Remove a specific skill from all agents
+npx skills remove my-skill --agent '*'
+
+# Use 'rm' alias
+npx skills rm my-skill
+```
+
+| Option         | Description                                      |
+| -------------- | ------------------------------------------------ |
+| `-g, --global` | Remove from global scope (~/) instead of project |
+| `-a, --agent`  | Remove from specific agents (use `'*'` for all)  |
+| `-s, --skill`  | Specify skills to remove (use `'*'` for all)     |
+| `-y, --yes`    | Skip confirmation prompts                        |
+| `--all`        | Shorthand for `--skill '*' --agent '*' -y`       |
+
+## Supported Agents
+
+Skills can be installed to any of these agents:
+
+<!-- supported-agents:start -->
+| Agent | `--agent` | Project Path | Global Path |
+|-------|-----------|--------------|-------------|
+| Amp, Kimi Code CLI, Replit, Universal | `amp`, `kimi-cli`, `replit`, `universal` | `.agents/skills/` | `~/.config/agents/skills/` |
+| Antigravity | `antigravity` | `.agents/skills/` | `~/.gemini/antigravity/skills/` |
+| Augment | `augment` | `.augment/skills/` | `~/.augment/skills/` |
+| Claude Code | `claude-code` | `.claude/skills/` | `~/.claude/skills/` |
+| OpenClaw | `openclaw` | `skills/` | `~/.openclaw/skills/` |
+| Cline, Warp | `cline`, `warp` | `.agents/skills/` | `~/.agents/skills/` |
+| CodeBuddy | `codebuddy` | `.codebuddy/skills/` | `~/.codebuddy/skills/` |
+| Codex | `codex` | `.agents/skills/` | `~/.codex/skills/` |
+| Command Code | `command-code` | `.commandcode/skills/` | `~/.commandcode/skills/` |
+| Continue | `continue` | `.continue/skills/` | `~/.continue/skills/` |
+| Cortex Code | `cortex` | `.cortex/skills/` | `~/.snowflake/cortex/skills/` |
+| Crush | `crush` | `.crush/skills/` | `~/.config/crush/skills/` |
+| Cursor | `cursor` | `.agents/skills/` | `~/.cursor/skills/` |
+| Deep Agents | `deepagents` | `.agents/skills/` | `~/.deepagents/agent/skills/` |
+| Droid | `droid` | `.factory/skills/` | `~/.factory/skills/` |
+| Firebender | `firebender` | `.agents/skills/` | `~/.firebender/skills/` |
+| Gemini CLI | `gemini-cli` | `.agents/skills/` | `~/.gemini/skills/` |
+| GitHub Copilot | `github-copilot` | `.agents/skills/` | `~/.copilot/skills/` |
+| Goose | `goose` | `.goose/skills/` | `~/.config/goose/skills/` |
+| Junie | `junie` | `.junie/skills/` | `~/.junie/skills/` |
+| iFlow CLI | `iflow-cli` | `.iflow/skills/` | `~/.iflow/skills/` |
+| Kilo Code | `kilo` | `.kilocode/skills/` | `~/.kilocode/skills/` |
+| Kiro CLI | `kiro-cli` | `.kiro/skills/` | `~/.kiro/skills/` |
+| Kode | `kode` | `.kode/skills/` | `~/.kode/skills/` |
+| MCPJam | `mcpjam` | `.mcpjam/skills/` | `~/.mcpjam/skills/` |
+| Mistral Vibe | `mistral-vibe` | `.vibe/skills/` | `~/.vibe/skills/` |
+| Mux | `mux` | `.mux/skills/` | `~/.mux/skills/` |
+| OpenCode | `opencode` | `.agents/skills/` | `~/.config/opencode/skills/` |
+| OpenHands | `openhands` | `.openhands/skills/` | `~/.openhands/skills/` |
+| Pi | `pi` | `.pi/skills/` | `~/.pi/agent/skills/` |
+| Qoder | `qoder` | `.qoder/skills/` | `~/.qoder/skills/` |
+| Qwen Code | `qwen-code` | `.qwen/skills/` | `~/.qwen/skills/` |
+| Roo Code | `roo` | `.roo/skills/` | `~/.roo/skills/` |
+| Trae | `trae` | `.trae/skills/` | `~/.trae/skills/` |
+| Trae CN | `trae-cn` | `.trae/skills/` | `~/.trae-cn/skills/` |
+| Windsurf | `windsurf` | `.windsurf/skills/` | `~/.codeium/windsurf/skills/` |
+| Zencoder | `zencoder` | `.zencoder/skills/` | `~/.zencoder/skills/` |
+| Neovate | `neovate` | `.neovate/skills/` | `~/.neovate/skills/` |
+| Pochi | `pochi` | `.pochi/skills/` | `~/.pochi/skills/` |
+| AdaL | `adal` | `.adal/skills/` | `~/.adal/skills/` |
+<!-- supported-agents:end -->
+
+> [!NOTE]
+> **Kiro CLI users:** After installing skills, manually add them to your custom agent's `resources` in
+> `.kiro/agents/<agent>.json`:
+>
+> ```json
+> {
+>   "resources": ["skill://.kiro/skills/**/SKILL.md"]
+> }
+> ```
+
+The CLI automatically detects which coding agents you have installed. If none are detected, you'll be prompted to select
+which agents to install to.
 
 
 4. **Execute the Installation**
