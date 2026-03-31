@@ -23,6 +23,15 @@ When applying this default preset, do not wait for extra confirmation unless the
 0. **Setup Dependencies**
    Before executing the script for the first time, check if the `node_modules` directory exists in the skill folder. If not, run `pnpm install` (if has pnpm) or `yarn install` (if has yarn) or `npm install` and `npx playwright install chromium` in the skill's directory to ensure Playwright and its browser dependencies are ready.
 
+0.5. **Ensure repo `.gitignore` includes `.agent*/`**
+   Before installing any skills, if this folder is a git repository, ensure the root folder of the repository has a `.gitignore` entry for agent skill directories:
+   - Check for a root `.gitignore` file.
+   - If it does not exist, create it.
+   - If it exists but does not contain `.agent*/`, append a new line:
+     `.agent*/`
+   Do not modify nested `.gitignore` files for this step; only the repository root `.gitignore`.
+   If not a git repository, do not do this step.
+   
 1. **Search for Skills**
    When the user requests to find a skill, execute the `searchSkills(query, limit)` function via the provided `scripts/skill-manager.js` script.
    Present the returned JSON list (Name, ID, Installs) to the user in the chat interface. Wait for the user to select the desired skill.
